@@ -3,6 +3,7 @@ import session from "express-session";
 import passport from "passport";
 import "./strategy/passport.js";
 import { authRoute } from "./routes/auth.routes.js";
+import { routerDashboard } from "./routes/dashboard.routes.js";
 // import connectPg from 'connect-pg-simple';
 // import { connect } from './db.js';
 
@@ -24,4 +25,6 @@ app.use((req, res, next) => {
   next();
 });
 
+
 app.use("/auth", authRoute);
+app.use("/dashboard", routerDashboard);

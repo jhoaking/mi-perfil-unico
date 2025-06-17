@@ -1,13 +1,14 @@
 import { Router } from "express";
 import passport from "passport";
 
-
 export const authRoute = Router();
 
-authRoute.get('/login',passport.Authenticator('github'));
+authRoute.get("/login", passport.authenticate("github"));
 
-authRoute.get('/redirect',passport.authenticate('github'), {
-    successRedirect : '/dashboard',
-    failureRedirect : '/auth/login'
-
-})
+authRoute.get(
+  "/redirect",
+  passport.authenticate("github", {
+    successRedirect: "/dashboard",
+    failureRedirect: "/auth/login",
+  })
+);

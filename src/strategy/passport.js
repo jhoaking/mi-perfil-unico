@@ -1,7 +1,7 @@
-import { GITHUB_CLIENT_SECRET, GITHUB_CLIENT_ID } from "../config";
+import { GITHUB_CLIENT_SECRET, GITHUB_CLIENT_ID } from "../config.js";
 import passport from "passport";
 import { Strategy } from "passport-github2";
-import { UserClass } from "../model/UserModel";
+import { UserClass } from "../model/UserModel.js";
 
 passport.serializeUser((user, done) => {
   done(null, user.github_id);
@@ -18,7 +18,7 @@ passport.use(
       clientID: GITHUB_CLIENT_ID,
       clientSecret: GITHUB_CLIENT_SECRET,
       callbackURL: "/auth/redirect",
-      scope: ["identify", "project"],
+      scope: ["identify", "repo"],
     },
     async (accessToken, refresh_token, profile, done) => {
       try {
@@ -30,8 +30,8 @@ passport.use(
         const guardar = await UserClass.guardarUser(
           profile.id,
           profile.username,
-          profile.avatar_url,
-          profile.project
+          profile.photos[0].value,
+          profile.repo
         );
 
         done(null, guardar);
