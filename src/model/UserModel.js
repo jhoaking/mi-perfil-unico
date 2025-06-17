@@ -1,9 +1,9 @@
 import { connect } from "../db.js";
 
 export class UserClass {
-  static guardarUser = async (github_id, username, avatar_url) => {
-    const query = `INSERT INTO "Users"(github_id,username,avatar_url,createdAt)VALUES($1,$2,$3,NOW())RETURNING * ;`;
-    const values = [github_id, username, avatar_url];
+  static guardarUser = async (github_id, username, avatar_url,project) => {
+    const query = `INSERT INTO "Users"(github_id,username,avatar_url,createdAt,project)VALUES($1,$2,$3,NOW(),$4)RETURNING * ;`;
+    const values = [github_id, username, avatar_url,project];
     const result = await connect.query(query, values);
     return result.rows[0];
   };
