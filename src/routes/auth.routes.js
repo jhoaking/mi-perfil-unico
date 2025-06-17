@@ -8,7 +8,18 @@ authRoute.get("/login", passport.authenticate("github"));
 authRoute.get(
   "/redirect",
   passport.authenticate("github", {
-    successRedirect: "/dashboard",
     failureRedirect: "/auth/login",
-  })
+  }),
+  (req, res) => {
+    const user = req.user;
+    const token = user.token;
+
+    res.cookie("access_token", token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+    res.redirect("/dashboard");
+  }
 );

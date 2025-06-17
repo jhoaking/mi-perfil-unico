@@ -2,12 +2,15 @@ import express from "express";
 import session from "express-session";
 import passport from "passport";
 import "./strategy/passport.js";
+import cookieParser from "cookie-parser";
 import { authRoute } from "./routes/auth.routes.js";
 import { routerDashboard } from "./routes/dashboard.routes.js";
 // import connectPg from 'connect-pg-simple';
 // import { connect } from './db.js';
 
 export const app = express();
+
+app.use(cookieParser());
 
 app.use(
   session({
