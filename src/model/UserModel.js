@@ -15,7 +15,7 @@ export class UserClass {
   };
 
   static controlUser = async (github_id) => {
-    const query = `SELECT * FROM "USERS" WHERE github_id = $1`;
+    const query = `SELECT * FROM "Users" WHERE github_id = $1`;
     const result = await connect.query(query, [github_id]);
     if (result.rowCount === 0) return null;
 
