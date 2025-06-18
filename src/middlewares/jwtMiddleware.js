@@ -1,8 +1,10 @@
-import { JWT_SECRET } from "../config";
+import { JWT_SECRET } from "../config.js";
 import jwt from "jsonwebtoken";
 
 export const isAutorized = async (req, res, next) => {
   const token = req.cookies.access_token;
+  console.log(token);
+  
 
   if (!token) {
     res.status(404).json({ message: "token invalido" });

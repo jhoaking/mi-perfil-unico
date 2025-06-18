@@ -12,7 +12,11 @@ authRoute.get(
   }),
   (req, res) => {
     const user = req.user;
+    console.log("user", user);
+
     const token = user.token;
+
+    console.log("token ", token);
 
     res.cookie("access_token", token, {
       httpOnly: true,
