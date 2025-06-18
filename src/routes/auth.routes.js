@@ -1,5 +1,7 @@
 import { Router } from "express";
 import passport from "passport";
+import jwt from "jsonwebtoken";
+import { JWT_SECRET } from "../config.js";
 
 export const authRoute = Router();
 
@@ -14,7 +16,16 @@ authRoute.get(
     const user = req.user;
     console.log("user", user);
 
-    const token = user.token;
+    const payload = {
+      github_id: user.github_id,
+      username: user.username,
+    };
+
+    const token = jwt.sign(payload, JWT_SECRET, {
+      expiresIn: "1d",
+    });
+
+    
 
     console.log("token ", token);
 
