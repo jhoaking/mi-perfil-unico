@@ -14,7 +14,6 @@ authRoute.get(
   }),
   (req, res) => {
     const user = req.user;
-    console.log("user", user);
 
     const payload = {
       github_id: user.github_id,
@@ -24,10 +23,6 @@ authRoute.get(
     const token = jwt.sign(payload, JWT_SECRET, {
       expiresIn: "1d",
     });
-
-    
-
-    console.log("token ", token);
 
     res.cookie("access_token", token, {
       httpOnly: true,

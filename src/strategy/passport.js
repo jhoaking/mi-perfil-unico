@@ -3,7 +3,6 @@ import passport from "passport";
 import { Strategy } from "passport-github2";
 import { UserClass } from "../model/UserModel.js";
 
-
 passport.serializeUser((user, done) => {
   done(null, user.github_id);
 });
@@ -35,10 +34,7 @@ passport.use(
           profile.repo
         );
 
-       
-
-
-        done(null, guardar );
+        done(null, guardar);
       } catch (error) {
         console.error(error);
         done(error, null);
